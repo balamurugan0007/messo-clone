@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fashion mart</title>
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+</head>
+<body id="sign-body">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <div class="container mt-5 " id="container">
+       
+        <div class="row " >
+            <h2 class="text-center mt-5 mb-4" id="head-tag"><span id="head-span">Fashion</span>mart</h2>
+            <div class="col-lg-5 d-flex justify-content-center " id='form-pic'>
+                
+                <img src="{% static 'fa2.png' %}"  class="img-fluid" id="pic" alt="pic"/>
+            </div>
+            <div class=" col-lg-6 mt-3 " id="sign">
+                <form method="POST" action="" autocomplete="on">
+                    {% csrf_token %}
+                    <h3 class="text-center text-danger" id="signup-btn">Signup</h3>
+                    <div class="row">
+                        <div class="col-lg  m-sm-auto">
+                            <input type="text" placeholder=" user name" class="form-control mt-2 mb-2 pt-3 " name="user"/>
+                        
+                        </div>
+                       
+                    </div>
+                    <div class="row">
+                        <div class="col-lg  m-sm-auto">
+                           <input type="text" placeholder="E-mail" class="form-control mt-2 mb-2 pt-3" name="email"/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg  m-sm-auto">
+                            <input type="text" placeholder="Password" class="form-control mt-2 mb-2 pt-3" name="pass1"/>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg  m-sm-auto ">
+                           <input type="text" placeholder="Repeat Password" class="form-control mt-2 mb-2 pt-3" name="pass2"/>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <p class="text-center text-danger"> {{error}}</p> 
+                      </div> 
+                    
+                     <span id="terms" class="d-flex justify-content-center"> 
+                           <input type="checkbox"  class="form-check mt-lg-3 mb-3 ml-2 pt-3" />
+                            <p class="mt-4">Read the terms and conditions and  the privacy agreements</p>
+                       
+                     </span> 
+                     
+
+                     <div class="row">
+                        <div class="col-lg  m-sm-auto mt-3">
+                           <button type="submit" id="submit-btn"  class="form-control  pt-2 bg-black text-white">Signup</button>
+                        </div>
+                    
+                    </div>
+                    
+                        <div class="row mt-4 mb-4">
+                            <p class="text-center text-black-50" >You already have an account! <a href="login" class="text-decoration-none " onclick="store">Login </a></p>
+                        </div>
+
+                    
+                    
+                        
+                    
+                    
+                    
+
+                </form>
+            </div>
+            
+        </div>
+        
+       </div>
+</body>
+</html>

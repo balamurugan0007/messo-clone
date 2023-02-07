@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+  <title>Fashion mart</title>  
+  </head>
+<body class="bg-light">
+  <div class='container'>
+    <!-- Navbar -->
+
+    <div className='nav'id='nav'>
+        <h2 class="mt-3" id="nav-head">Fashion Mart</h2>
+        <input type="text" placeholder="search your item" class="form-control mt-2" name="user"/>
+        <ul class="mt-3">
+          <li><a href="{% url 'home' %}" class="text-black-50">Home</a></li>
+          <li><a href="{% url 'cart' %}" class="text-black-50">orders</a></li>
+        
+          <li><a href="{% url 'about' %}" class="text-black-50">About</a></li>
+          <li><a href="{% url 'contacts' %}" class="text-black-50">Contact</a></li>
+          <li><a href="{% url 'profile' %}" class="text-black-50">{{user}}</a></li>
+        </ul>
+
+    </div>
+
+
+    <div class="row">
+        {% for item in products %}
+        <!--card-img-->
+        <div class="col-lg-8  d-flex justify-content-center mt-4 my-4" >
+            
+            <div class="row d-flex justify-content-center">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb my-4">
+                      <li class="breadcrumb-item" ><a href="{% url 'home' %}" id="bread-link">Home</a></li>
+                      <li class="breadcrumb-item"><a href="#" id="bread-link">{{ item.catogory }}</a></li>
+                      <li class="breadcrumb-item active" aria-current="page" id="bread-now">{{item.name}}</li>
+                    </ol>
+                  </nav>
+
+
+
+                <img src="{{item.image.url}}" class="img-fluid" id="image" alt="pic"/>
+                {% if item.stocks < 7 %}
+                <p class="text-danger text-center mt-2" id="stocks">only {{item.stocks}} stocks are available</p>
+
+                {% endif %}
+               <ul class="d-flex justify-content-center">
+                <li>
+                    <button class=" p-2 btn-lg" id="cart-btn">Add Cart</button>
+                    
+                </li>
+                <li>
+                    <button class=" p-2 btn-lg" id="order-btn">Order Now</button>
+                </li>
+               </ul>
+               
+             
+                    
+                
+            </div>
+        </div>
+        <div class="col">
+            <div class="row mt-4">
+                <!--CARD DETAIS-->
+                <div class="card mt-4" id="card-top">
+                    <h5 class="text-light-50" id="card-name">{{item.name}}</h5>
+                    <h2 class=" mt-1" id="card-price">₹{{item.new_price}}</h2>
+                    <p class=""><s>₹{{item.old_price}}</s></p>
+                    <h4 class="mt-3 text-warning">{{item.ratings}}<p id="card-rate">Ratings</p></h4>
+
+                </div>
+
+                 <!--size details-->
+
+                <div class="card mt-4" id="card-top">
+                    <h5 id="card-select">Select size</h5>
+                    <div class="mt-3">
+                     <ul class="d-flex justify-content-between mt-2">
+                       <li> <input type="radio" class="btn-check" name="options" id="option1" autocomplete="off" checked>
+                         <label class="btn btn-outline-danger" for="option1" id="card-size">S</label>
+                        </li>
+                        
+                        <li> <input type="radio" class="btn-check" name="options" id="option2" autocomplete="off" checked>
+                            <label class="btn btn-outline-danger" for="option2" id="card-size">M</label>
+                        </li>
+
+                        <li> <input type="radio" class="btn-check" name="options" id="option3" autocomplete="off" checked>
+                            <label class="btn btn-outline-danger" for="option3" id="card-size">L</label>
+                        </li>
+
+                           <li> <input type="radio" class="btn-check" name="options" id="option4" autocomplete="off" checked>
+                            <label class="btn btn-outline-danger" for="option4" id="card-size">XL</label>
+                           </li>
+                        
+                     </ul>
+                    </div>
+                </div>
+
+                
+                    <!--product details-->
+
+
+                <div class="card mt-4">
+                    <h4 id="card-select">product details</h4>
+                    <p id="card-para-detail">Name : {{item.name}}</p>
+                    <P id="card-para-detail">{{item.description}}</p>
+                    <P id="card-para-detail">Date : {{item.date}}</P>
+                    
+
+                </div>
+
+                <!--soldby-->
+                <div class="card mt-4">
+                    <h4 id="card-select" >Sold By</h4>
+                    <ul class="d-flex justify-content-between">
+                        <li id="view-text">Vellical</li>
+                        <li><button class="btn" id="view-btn">View shop</button></li>
+                    </ul>
+                    <div class="row">
+                        <div class="col">
+                            <h4 class="mt-3 text-dark" id="view-h4">{{item.ratings}}<p id="view-rate">Ratings</p></h4>
+                           
+                        </div>
+                        <div class="col">
+                            <h4 class="mt-3 text-dark" id="view-h4">279<p id="view-rate">Followers</p></h4>
+                        </div>
+                        <div class="col">
+                            <h4 class="mt-3 text-dark" id="view-h4">{{item.stocks}}<p id="view-rate">stocks</p></h4>
+                            
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+  </div>
+    
+</body>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Charis+SIL:ital,wght@1,700&family=Inter:wght@700&family=Noto+Sans:ital,wght@1,500&family=Open+Sans:ital,wght@1,700&family=Poppins:ital,wght@0,500;1,400&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Lora:wght@700&family=Prompt:wght@600&display=swap');
+       *{
+        list-style: none;
+       }
+        #nav-head{
+          font-size: 28px;
+          font-family:Lora;
+          font-weight: bolder;
+          cursor: pointer;
+  
+          color:#FF00A7;
+  
+        }
+        #nav{
+          display: flex;
+          justify-content: space-between;
+        }
+        #nav ul{
+          display: flex;
+          list-style: none;
+          text-decoration: none;
+          margin:5px ;
+          
+  
+        }
+        #nav ul li{
+          margin-left: 8px;
+          margin-right: 8px;
+          text-decoration: none;
+        }
+        #nav ul li a{
+          font-size: medium;
+         
+          font-family: Poppins;
+          text-decoration: none;
+        }
+  
+        #nav ul li a :hover{
+          color: #FF00A7;
+  
+        }
+        #nav input{
+          height: 50px;
+          width: 500px;
+        }
+  
+        #card{
+         
+      box-shadow: 22px 28px 43px -17px rgba(0,0,0,0.75);
+  -webkit-box-shadow: 22px 28px 43px -17px rgba(0,0,0,0.75);
+  -moz-box-shadow: 22px 28px 43px -17px rgba(0,0,0,0.75);
+  
+  
+       border-radius: 15px;     
+  
+        }
+  
+       #image{
+        width:500px;
+        height:600px;
+        border-radius: 10px;
+       }
+      #card-name{
+        opacity: .7;
+        font-family: Lora;
+      }
+     #card-top{
+        color: rgb(146, 141, 141);
+     }
+     #card-rate{
+        font-size: small;
+        
+        font-family:Prompt ;
+     }
+     #card-price{
+        color:black;
+        opacity: .8;
+     }
+     #card-size{
+        font-size: x-large;
+        font-family: Poppins;
+        opacity: .85;
+        
+     }
+     #card-top li{
+        list-style: none;
+     }
+     #card-select{
+       
+        color: rgb(54, 54, 54);
+        
+        font-family: Lora;
+        font-size:22px;
+      }
+      #card-para-detail{
+        font-family:Poppins ;
+        font-size: small;
+        opacity: .8;
+      }
+      #cart-btn{
+        
+        background-color:white;
+        border-radius: 4px;
+      
+        margin: 20px;
+        size-adjust: 70px;
+        color:rgb(80, 79, 79);
+        font-size: larger;
+        font-family: Lora;
+        
+       
+
+      }
+      #order-btn{
+        background-color: #FF00A7;
+        border-radius: 4px;
+        border: none;
+        margin: 20px;
+        size-adjust: 70px;
+        color: white;
+        font-size: 21px;
+        font-family: Lora;
+      }
+
+      #view-btn{
+        font-family: Poppins;
+        font-size: medium;
+        color: whitesmoke;
+        border: 2px;
+        background-color: #FF00A7;
+      }
+      #view-text{
+        font-family: Poppins;
+        font-size: medium;
+        margin-top: 5px;;
+
+      }
+      #bread-link{
+        font-family: Poppins;
+        color: #FF00A7;
+        font-size: medium;
+        text-decoration: none;
+        opacity: .6;
+      }
+      #view-rate{
+        font-size: small;
+        
+        font-family:Prompt ;
+        opacity: .7;
+      }
+      #view-h4{
+        font-size: medium;
+        
+        font-family:Prompt ;
+        opacity: .8;
+
+      }
+      #similar-head{
+        font-size: 24px;
+        font-family: Roboto;
+        color: black;
+        opacity: .8;
+      }
+      #stocks{
+        
+        font-size: large;
+        font-family: Poppins;
+      }
+  
+  
+  
+  
+  
+  </style>
+</html>
