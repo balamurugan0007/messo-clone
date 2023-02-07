@@ -1,5 +1,5 @@
 from django.shortcuts import render,HttpResponseRedirect
-
+from django.http import  JsonResponse
 # Create your views here.
 import rsa
 from .models import catogory,products,info
@@ -128,12 +128,12 @@ def about(request):
     return render(request,"about.html",)
 
 
-def detail(request):
-    return render(request,"contact.html",)
+
 
 
 
 def cart(request):
+    
     return render(request,"cart.html",)
 
 

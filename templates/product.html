@@ -21,7 +21,7 @@
           <li><a href="{% url 'cart' %}" class="text-black-50">orders</a></li>
         
           <li><a href="{% url 'about' %}" class="text-black-50">About</a></li>
-          <li><a href="{% url 'contacts' %}" class="text-black-50">Contact</a></li>
+          
           <li><a href="{% url 'profile' %}" class="text-black-50">{{user}}</a></li>
         </ul>
 
@@ -138,13 +138,60 @@
 
                 </div>
             </div>
+            <input type="hidden" value="{{item.id}}" id="pid"/>
         </div>
         {% endfor %}
     </div>
 
   </div>
-    
+
+  <!---script tags-->
+    <script>
+      document.addEventListener('DOMContentLoaded',function event(){
+        const btncart=document.getElementById('cart-btn')
+        const orderbtn=document.getElementById('order-btn')
+        const pid=document.getElementById('pid')
+
+
+        btncart.addEventListener("click", function() {
+     
+     let postObj = { 
+         'pid': pid.value
+     }
+     console.log(postObj);
+     fetch("/cart",{
+       method: 'POST',
+       credentials: 'same-origin',
+       headers:{
+           'Accept': 'application/json',
+           'X-Requested-With': 'XMLHttpRequest',
+           'X-CSRFToken': '{{ csrf_token }}',
+       },
+       body: JSON.stringify(postObj)
+     })//.then(response => {
+       //return response.json();
+     //}).
+     .then(data => {
+       //console.log(data);
+       alert(data['status']);
+     });
+   
+});
+
+    });
+      
+        	//console.log(data);
+        
+ 
+
+
+
+
+
+    </script>
 </body>
+
+
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Charis+SIL:ital,wght@1,700&family=Inter:wght@700&family=Noto+Sans:ital,wght@1,500&family=Open+Sans:ital,wght@1,700&family=Poppins:ital,wght@0,500;1,400&display=swap');
   @import url('https://fonts.googleapis.com/css2?family=Lora:wght@700&family=Prompt:wght@600&display=swap');

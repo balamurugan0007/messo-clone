@@ -27,7 +27,7 @@ urlpatterns = [
     path('home/<int:id>',views.collectionsview,name="collections"),
     path('home/catogory/products/<int:id>',views.productview,name="products"),
     path('login', views.login,name='login'),
-    path('contacts', views.detail,name='contacts'),
+    
     path('about', views.about,name='about'),
     path('cart', views.cart,name='cart'),
     path('profile', views.profile,name='profile'),
