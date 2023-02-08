@@ -46,12 +46,12 @@ class products(models.Model):
     def __str__(self) :
         return self.name
     
+
 class favourite(models.Model):
-    user=models.ForeignKey(info,on_delete=models.CASCADE)
     product=models.ForeignKey(products,on_delete=models.CASCADE)
     date=models.DateTimeField(auto_now_add=True)
 
-class addcart(models.Model):
-    user=models.ForeignKey(info,on_delete=models.CASCADE)
+class cart(models.Model):
     product=models.ForeignKey(products,on_delete=models.CASCADE)
-    date=models.DateTimeField(auto_now_add=True)   
+    size=models.CharField(blank=False,null=False ,max_length=30)
+    date=models.DateTimeField(auto_now_add=True)

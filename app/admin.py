@@ -12,7 +12,9 @@ admin.site.register(products)
 
 admin.site.register(favourite)
 
-admin.site.register(addcart)
+admin.site.register(cart)
+
+
 
 
 

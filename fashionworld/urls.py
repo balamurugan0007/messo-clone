@@ -30,10 +30,11 @@ urlpatterns = [
     
     path('about', views.about,name='about'),
     path('cart', views.cart,name='cart'),
-    path('profile', views.profile,name='profile'),
+    
+    path('search',views.search,name='search'),
+    path('err',views.search,name='err'),
     
 
-    path('accounts/', include('allauth.urls')),
 
 ]
 

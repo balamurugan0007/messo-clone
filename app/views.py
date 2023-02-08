@@ -1,4 +1,4 @@
-from django.shortcuts import render,HttpResponseRedirect
+from django.shortcuts import render,HttpResponseRedirect,redirect
 from django.http import  JsonResponse
 # Create your views here.
 import rsa
@@ -17,6 +17,7 @@ def sign_in(request):
         email=request.POST['email']
         password1=request.POST['pass1']
         password2=request.POST['pass2']
+        
         
 
         obj=info()
@@ -62,12 +63,49 @@ def sign_in(request):
     return render(request,"signin.html")
 
 def home(request):
+    if request.method=="POST":
+        find = request.POST.get('search')
+        print(find)
+        if (products.objects.filter(name=find)):
+            product=products.objects.filter(name=find)
+            return render(request,'search.html',{'data':product})
+        
+        if(catogory.objects.filter(name=find,status=0)):
+            catagory=catogory.objects.filter(name=find,status=0)
+            return render(request,'search.html',{'data':catagory})
+        
+        if find:
+            err=str('The product not found please search another...!')
+            return render(request,'err.html',{'data':err})
 
+
+
+        
+    
     data=catogory.objects.all()
+
+    
+            
+            
     return render(request,'home.html',{'data':data})
 
 
 def collectionsview(request,id):
+    if request.method=="POST":
+        find = request.POST.get('search')
+        print(find)
+        if (products.objects.filter(name=find)):
+            product=products.objects.filter(name=find)
+            return render(request,'search.html',{'data':product})
+        
+        if(catogory.objects.filter(name=find,status=0)):
+            catagory=catogory.objects.filter(name=find,status=0)
+            return render(request,'search.html',{'data':catagory})
+        
+        if find:
+            err=str('The product not found please search another...!')
+            return render(request,'err.html',{'data':err})
+
     Catagory=catogory.objects.all()
     for item in Catagory:
         if id==item.id:
@@ -88,6 +126,21 @@ def collectionsview(request,id):
 
 
 def productview(request,id):
+    if request.method=="POST":
+        find = request.POST.get('search')
+        print(find)
+        if (products.objects.filter(name=find)):
+            product=products.objects.filter(name=find)
+            return render(request,'search.html',{'data':product})
+        
+        if(catogory.objects.filter(name=find,status=0)):
+            catagory=catogory.objects.filter(name=find,status=0)
+            return render(request,'search.html',{'data':catagory})
+        
+        if find:
+            err=str('The product not found please search another...!')
+            return render(request,'err.html',{'data':err})
+
     
       
     if(products.objects.filter(id=id,status=0)):
@@ -104,13 +157,12 @@ def productview(request,id):
     
 def login(request):
     if request.method=="POST":
-        email=request.POST['email']
-        password1=request.POST['pass1']
+        email=request.POST.get('email')
+        password1=request.POST.get('pass1')
         if(info.objects.filter(email=email)):
             user=info.objects.filter(email=email)
-            for data in user:
-                name=data.Name
-                return HttpResponseRedirect(request,'home.html',{'profile':name})
+
+           
 
         else:
             return render(request,"login.html",{'error':'enter the correct email or password'})
@@ -137,10 +189,12 @@ def cart(request):
     return render(request,"cart.html",)
 
 
-def profile(request):
-    return render(request,"profile.html",)
 
 
+
+def search(request):
+    
+    return render(request,"search.html",)
 
 
 
